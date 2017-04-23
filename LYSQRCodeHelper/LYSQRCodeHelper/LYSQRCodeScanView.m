@@ -29,6 +29,8 @@ static CGFloat const maskAlpha = 0.4;
 
 @property(nonatomic,strong)UIButton *lightBtn;
 
+@property(nonatomic,strong)UIButton *albumBtn;
+
 @property(nonatomic,strong)UIImageView *leftTopImage;
 
 @property(nonatomic,strong)UIImageView *rightTopImage;
@@ -64,6 +66,7 @@ static CGFloat const maskAlpha = 0.4;
     [self.layer addSublayer:self.scanLayer];
     [self addSubview:self.tipLb];
     [self addSubview:self.lightBtn];
+    [self addSubview:self.albumBtn];
     [self addSubview:self.leftTopImage];
     [self addSubview:self.rightTopImage];
     [self addSubview:self.leftBottomImage];
@@ -189,11 +192,43 @@ static CGFloat const maskAlpha = 0.4;
         [_lightBtn setTitle:@"开灯" forState:UIControlStateNormal];
         [_lightBtn setTitle:@"关灯" forState:UIControlStateSelected];
         [_lightBtn setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8] forState:UIControlStateNormal];
-        [_lightBtn setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8] forState:UIControlStateNormal];
+        [_lightBtn setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8] forState:UIControlStateSelected];
         _lightBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        _lightBtn.layer.masksToBounds = YES;
+        [_lightBtn setBackgroundImage:[self colorToImage:[[UIColor blackColor] colorWithAlphaComponent:0.6]] forState:UIControlStateNormal];
+        [_lightBtn setBackgroundImage:[self colorToImage:[[UIColor blackColor] colorWithAlphaComponent:0.5]] forState:UIControlStateSelected];
         [_lightBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _lightBtn;
+}
+
+-(UIButton*)albumBtn{
+    if (!_albumBtn) {
+        _albumBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_albumBtn setTitle:@"相册" forState:UIControlStateNormal];
+        [_albumBtn setTitle:@"相册" forState:UIControlStateHighlighted];
+        [_albumBtn setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8] forState:UIControlStateNormal];
+        [_albumBtn setTitleColor:[[UIColor whiteColor] colorWithAlphaComponent:0.8] forState:UIControlStateHighlighted];
+        _albumBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        _albumBtn.layer.masksToBounds = YES;
+        [_albumBtn setBackgroundImage:[self colorToImage:[[UIColor blackColor] colorWithAlphaComponent:0.6]] forState:UIControlStateNormal];
+        [_albumBtn setBackgroundImage:[self colorToImage:[[UIColor blackColor] colorWithAlphaComponent:0.5]] forState:UIControlStateHighlighted];
+        [_albumBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _albumBtn;
+}
+
+
+#pragma mark - 颜色转图片
+-(UIImage*)colorToImage:(UIColor*)color{
+    CGRect newRect = CGRectMake(0.0, 0.0, 1.0, 1.0);
+    UIGraphicsBeginImageContext(newRect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, newRect);
+    UIImage* theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
 }
 
 -(UIImageView *)leftTopImage{
@@ -271,7 +306,10 @@ static CGFloat const maskAlpha = 0.4;
     self.rightLayer.frame = CGRectMake(CGRectGetMaxX(self.scanLayer.frame), CGRectGetMaxY(self.topLayer.frame), self.scanX, CGRectGetHeight(self.leftLayer.frame));
     self.bottomLayer.frame = CGRectMake(0, CGRectGetMaxY(self.scanLayer.frame), self.frame.size.width, self.frame.size.height - CGRectGetMaxY(self.scanLayer.frame));
     self.tipLb.frame = CGRectMake(0, CGRectGetMaxY(self.scanLayer.frame) + 30.f, self.frame.size.width, 25);
-    self.lightBtn.frame = CGRectMake(0, CGRectGetMaxY(self.tipLb.frame) + 20.f, self.frame.size.width, 25);
+    self.lightBtn.frame = CGRectMake(CGRectGetMinX(self.scanLayer.frame), CGRectGetMaxY(self.tipLb.frame) + 20.f, 60.f, 60.f);
+    self.lightBtn.layer.cornerRadius = CGRectGetHeight(self.lightBtn.frame) / 2;
+    self.albumBtn.frame = CGRectMake(CGRectGetMaxX(self.scanLayer.frame) - 60.f, CGRectGetMaxY(self.tipLb.frame) + 20.f, 60.f, 60.f);
+    self.albumBtn.layer.cornerRadius = CGRectGetHeight(self.albumBtn.frame) / 2;
     self.leftTopImage.frame = CGRectMake(CGRectGetMinX(self.scanLayer.frame) - self.leftTopImage.image.size.width * 0.5 +  margin, CGRectGetMinY(self.scanLayer.frame) - self.leftTopImage.image.size.height * 0.5 +  margin, self.leftTopImage.image.size.width, self.leftTopImage.image.size.height);
     self.rightTopImage.frame = CGRectMake(CGRectGetMaxX(self.scanLayer.frame) - self.rightTopImage.image.size.width * 0.5 - margin, CGRectGetMinY(self.leftTopImage.frame), self.rightTopImage.image.size.width,self.rightTopImage.image.size.height);
     self.leftBottomImage.frame = CGRectMake(CGRectGetMinX(self.leftTopImage.frame), CGRectGetMaxY(self.scanLayer.frame) - self.leftBottomImage.image.size.width * 0.5 - margin, self.leftBottomImage.image.size.width, self.leftBottomImage.image.size.height);
