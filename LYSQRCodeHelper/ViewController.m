@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "LYSQRCodeScanPage.h"
+#import "LYSAVRightHelper.h"
+#import "LYSAlertView.h"
 
 @interface ViewController ()
 
@@ -28,9 +30,20 @@
 }
 
 -(void)btnClicked:(UIButton*)sender{
-    [self presentViewController:[[LYSQRCodeScanPage alloc] init] animated:YES completion:^{
-        
-    }];
+    if ([LYSAVRightHelper hasAVRight]) {
+        LYSQRCodeScanPage *page = [[LYSQRCodeScanPage alloc]init];
+        page.ScanResultBlock = ^(NSString *result){
+            LYSAlertView * alertView = [[LYSAlertView alloc]initWithTitle:@"温馨提示" content:result leftTitle:@"取消" rightTitle:@"确定"];
+            [alertView showInView:[UIApplication sharedApplication].keyWindow];
+        };
+        [self presentViewController:page animated:YES completion:nil];
+    }else{
+        LYSAlertView * alertView = [[LYSAlertView alloc]initWithTitle:@"温馨提示" content:@"您没有权限" leftTitle:@"取消" rightTitle:@"确定"];
+        alertView.leftBlock = ^(){
+            
+        };
+        [alertView showInView:self.view];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

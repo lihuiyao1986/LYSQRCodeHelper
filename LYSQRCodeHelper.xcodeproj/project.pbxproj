@@ -16,6 +16,9 @@
 		48CAB1A81EAA005E0051AF0C /* LYSQRCodeScanPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1A71EAA005E0051AF0C /* LYSQRCodeScanPage.m */; };
 		48CAB1AA1EAA30F70051AF0C /* LYSQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48CAB1A91EAA30F70051AF0C /* LYSQRCode.bundle */; };
 		48CAB1AE1EAA446C0051AF0C /* LYSQRCodeScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1AD1EAA446C0051AF0C /* LYSQRCodeScanView.m */; };
+		48CAB1B41EACAE100051AF0C /* LYSAVRightHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1B31EACAE100051AF0C /* LYSAVRightHelper.m */; };
+		48CAB1B71EACB4770051AF0C /* LYSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1B61EACB4770051AF0C /* LYSAlertView.m */; };
+		48CAB1BA1EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1B91EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,12 @@
 		48CAB1A91EAA30F70051AF0C /* LYSQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LYSQRCode.bundle; sourceTree = "<group>"; };
 		48CAB1AC1EAA446C0051AF0C /* LYSQRCodeScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSQRCodeScanView.h; sourceTree = "<group>"; };
 		48CAB1AD1EAA446C0051AF0C /* LYSQRCodeScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSQRCodeScanView.m; sourceTree = "<group>"; };
+		48CAB1B21EACAE100051AF0C /* LYSAVRightHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSAVRightHelper.h; sourceTree = "<group>"; };
+		48CAB1B31EACAE100051AF0C /* LYSAVRightHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSAVRightHelper.m; sourceTree = "<group>"; };
+		48CAB1B51EACB4770051AF0C /* LYSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSAlertView.h; sourceTree = "<group>"; };
+		48CAB1B61EACB4770051AF0C /* LYSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSAlertView.m; sourceTree = "<group>"; };
+		48CAB1B81EACEE400051AF0C /* UIImage+LYSQRCodeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LYSQRCodeHelper.h"; sourceTree = "<group>"; };
+		48CAB1B91EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LYSQRCodeHelper.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,11 +100,17 @@
 		48CAB1A51EAA00380051AF0C /* LYSQRCodeHelper */ = {
 			isa = PBXGroup;
 			children = (
+				48CAB1B51EACB4770051AF0C /* LYSAlertView.h */,
+				48CAB1B61EACB4770051AF0C /* LYSAlertView.m */,
 				48CAB1A61EAA005E0051AF0C /* LYSQRCodeScanPage.h */,
 				48CAB1A71EAA005E0051AF0C /* LYSQRCodeScanPage.m */,
 				48CAB1A91EAA30F70051AF0C /* LYSQRCode.bundle */,
 				48CAB1AC1EAA446C0051AF0C /* LYSQRCodeScanView.h */,
 				48CAB1AD1EAA446C0051AF0C /* LYSQRCodeScanView.m */,
+				48CAB1B21EACAE100051AF0C /* LYSAVRightHelper.h */,
+				48CAB1B31EACAE100051AF0C /* LYSAVRightHelper.m */,
+				48CAB1B81EACEE400051AF0C /* UIImage+LYSQRCodeHelper.h */,
+				48CAB1B91EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m */,
 			);
 			path = LYSQRCodeHelper;
 			sourceTree = "<group>";
@@ -177,7 +192,10 @@
 				48CAB1931EA9FFDB0051AF0C /* AppDelegate.m in Sources */,
 				48CAB1A81EAA005E0051AF0C /* LYSQRCodeScanPage.m in Sources */,
 				48CAB1901EA9FFDB0051AF0C /* main.m in Sources */,
+				48CAB1B41EACAE100051AF0C /* LYSAVRightHelper.m in Sources */,
 				48CAB1AE1EAA446C0051AF0C /* LYSQRCodeScanView.m in Sources */,
+				48CAB1BA1EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m in Sources */,
+				48CAB1B71EACB4770051AF0C /* LYSAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

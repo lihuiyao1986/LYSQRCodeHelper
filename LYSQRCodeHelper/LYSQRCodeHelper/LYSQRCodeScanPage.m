@@ -9,6 +9,8 @@
 #import "LYSQRCodeScanPage.h"
 #import <AVFoundation/AVFoundation.h>
 #import "LYSQRCodeScanView.h"
+#import "UIImage+LYSQRCodeHelper.h"
+#import "LYSAVRightHelper.h"
 
 
 @interface LYSQRCodeScanPage ()<AVCaptureMetadataOutputObjectsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -62,10 +64,71 @@
 
 -(LYSQRCodeScanView*)scanView{
     if (!_scanView) {
+        __weak typeof (self)MyWeakSelf = self;
         _scanView = [[LYSQRCodeScanView alloc]initWithFrame:self.view.bounds];
+        _scanView.ReadFromAlbumBlock = ^(){
+            [MyWeakSelf pickerImageFromAlbum];
+        };
     }
     return _scanView;
 }
+
+#pragma mark - 从相册中选择照片
+-(void)pickerImageFromAlbum{
+    __weak typeof (self)MyWeakSelf = self;
+    if ([LYSAVRightHelper isCanUsePhotos:^{
+        [MyWeakSelf toPickerImagePage];
+    }]) {
+        [MyWeakSelf toPickerImagePage];
+    }
+}
+
+-(void)toPickerImagePage{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+#pragma mark -  UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    __weak typeof (self)MyWeakSelf = self;
+    [self dismissViewControllerAnimated:YES completion:^{
+        [MyWeakSelf scanQRCodeFromPhotosInTheAlbum:[info objectForKey:@"UIImagePickerControllerOriginalImage"]];
+    }];
+}
+
+- (void)scanQRCodeFromPhotosInTheAlbum:(UIImage *)image {
+    // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
+    // 声明一个CIDetector，并设定识别类型 CIDetectorTypeQRCode
+    if (image) {
+        NSString *scanResult;
+        image = [UIImage imageSizeWithScreenImage:image];
+        CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
+        // 取得识别结果
+        NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+        if (features.count > 0) {
+            CIQRCodeFeature *feature = [features objectAtIndex:0];
+            scanResult = feature.messageString;
+        }
+        if (scanResult.length > 0) {
+            
+            [self playSound:@"LYSQRCode.bundle/sound.caf"];
+            
+            [self endScan];
+
+            if (self.ScanResultBlock) {
+                self.ScanResultBlock(scanResult);
+            }
+        }
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"为识别的二维码");
+}
+
 
 #pragma mark - previewLayer
 -(AVCaptureVideoPreviewLayer*)previewLayer{
@@ -121,17 +184,21 @@
 #pragma mark - - - AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     
-    // 0、扫描成功之后的提示音
-    [self playSound:@"LYSQRCode.bundle/sound.caf"];
+    NSString * scanResult;
     
-    // 1、如果扫描完成，停止会话
-    [self endScan];
-    
-    // 3、设置界面显示扫描结果
     if (metadataObjects.count > 0) {
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
+        scanResult = obj.stringValue;
+    }
+    
+    if (scanResult.length > 0) {
+        
+        [self playSound:@"LYSQRCode.bundle/sound.caf"];
+        
+        [self endScan];
+        
         if (self.ScanResultBlock) {
-            self.ScanResultBlock(obj.stringValue);
+            self.ScanResultBlock(scanResult);
         }
     }
 }

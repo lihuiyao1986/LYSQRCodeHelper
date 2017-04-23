@@ -13,4 +13,7 @@
 #pragma mark - 扫描结果回调
 @property(nonatomic,copy)void(^ScanResultBlock)(NSString *qrcode);
 
+#pragma mark - 权限设置回调
+@property(nonatomic,copy)BOOL(^AVRightBlock)();
+
 @end

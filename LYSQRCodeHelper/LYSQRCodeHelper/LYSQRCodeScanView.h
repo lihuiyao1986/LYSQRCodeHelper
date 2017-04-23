@@ -19,6 +19,8 @@
 
 @property(nonatomic,assign,readonly)CGRect rectOfInterest;
 
+@property(nonatomic,copy)void(^ReadFromAlbumBlock)();
+
 -(void)startAnim;
 
 -(void)endAnim;
