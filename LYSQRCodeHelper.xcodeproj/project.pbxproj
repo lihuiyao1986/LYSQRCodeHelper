@@ -19,6 +19,8 @@
 		48CAB1B41EACAE100051AF0C /* LYSAVRightHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1B31EACAE100051AF0C /* LYSAVRightHelper.m */; };
 		48CAB1B71EACB4770051AF0C /* LYSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1B61EACB4770051AF0C /* LYSAlertView.m */; };
 		48CAB1BA1EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1B91EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m */; };
+		48CAB1BD1EAD80FC0051AF0C /* LYSQRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1BC1EAD80FC0051AF0C /* LYSQRCodeGenerator.m */; };
+		48CAB1C01EAD844F0051AF0C /* CreateQRCodePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CAB1BF1EAD844F0051AF0C /* CreateQRCodePage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,10 @@
 		48CAB1B61EACB4770051AF0C /* LYSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSAlertView.m; sourceTree = "<group>"; };
 		48CAB1B81EACEE400051AF0C /* UIImage+LYSQRCodeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LYSQRCodeHelper.h"; sourceTree = "<group>"; };
 		48CAB1B91EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LYSQRCodeHelper.m"; sourceTree = "<group>"; };
+		48CAB1BB1EAD80FC0051AF0C /* LYSQRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSQRCodeGenerator.h; sourceTree = "<group>"; };
+		48CAB1BC1EAD80FC0051AF0C /* LYSQRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSQRCodeGenerator.m; sourceTree = "<group>"; };
+		48CAB1BE1EAD844F0051AF0C /* CreateQRCodePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateQRCodePage.h; sourceTree = "<group>"; };
+		48CAB1BF1EAD844F0051AF0C /* CreateQRCodePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateQRCodePage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,8 @@
 				48CAB19C1EA9FFDB0051AF0C /* LaunchScreen.storyboard */,
 				48CAB19F1EA9FFDB0051AF0C /* Info.plist */,
 				48CAB18E1EA9FFDB0051AF0C /* Supporting Files */,
+				48CAB1BE1EAD844F0051AF0C /* CreateQRCodePage.h */,
+				48CAB1BF1EAD844F0051AF0C /* CreateQRCodePage.m */,
 			);
 			path = LYSQRCodeHelper;
 			sourceTree = "<group>";
@@ -111,6 +119,8 @@
 				48CAB1B31EACAE100051AF0C /* LYSAVRightHelper.m */,
 				48CAB1B81EACEE400051AF0C /* UIImage+LYSQRCodeHelper.h */,
 				48CAB1B91EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m */,
+				48CAB1BB1EAD80FC0051AF0C /* LYSQRCodeGenerator.h */,
+				48CAB1BC1EAD80FC0051AF0C /* LYSQRCodeGenerator.m */,
 			);
 			path = LYSQRCodeHelper;
 			sourceTree = "<group>";
@@ -188,12 +198,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48CAB1C01EAD844F0051AF0C /* CreateQRCodePage.m in Sources */,
 				48CAB1961EA9FFDB0051AF0C /* ViewController.m in Sources */,
 				48CAB1931EA9FFDB0051AF0C /* AppDelegate.m in Sources */,
 				48CAB1A81EAA005E0051AF0C /* LYSQRCodeScanPage.m in Sources */,
 				48CAB1901EA9FFDB0051AF0C /* main.m in Sources */,
 				48CAB1B41EACAE100051AF0C /* LYSAVRightHelper.m in Sources */,
 				48CAB1AE1EAA446C0051AF0C /* LYSQRCodeScanView.m in Sources */,
+				48CAB1BD1EAD80FC0051AF0C /* LYSQRCodeGenerator.m in Sources */,
 				48CAB1BA1EACEE400051AF0C /* UIImage+LYSQRCodeHelper.m in Sources */,
 				48CAB1B71EACB4770051AF0C /* LYSAlertView.m in Sources */,
 			);

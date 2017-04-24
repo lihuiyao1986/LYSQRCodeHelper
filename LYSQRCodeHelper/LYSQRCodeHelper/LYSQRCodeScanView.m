@@ -270,17 +270,14 @@ static CGFloat const maskAlpha = 0.4;
 
 #pragma mark - 开灯按钮被点击
 -(void)btnClicked:(UIButton*)sender{
-    if (self.ReadFromAlbumBlock) {
-        self.ReadFromAlbumBlock();
+    if (self.lightBtn == sender) {
+        [self turnOnLight:!sender.selected];
+        sender.selected = !sender.selected;
+    }else{
+        if (self.ReadFromAlbumBlock) {
+            self.ReadFromAlbumBlock();
+        }
     }
-//    if (self.lightBtn == sender) {
-//        [self turnOnLight:!sender.selected];
-//        sender.selected = !sender.selected;
-//    }else{
-//        if (self.ReadFromAlbumBlock) {
-//            self.ReadFromAlbumBlock();
-//        }
-//    }
 }
 
 #pragma mark - 区域
